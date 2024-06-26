@@ -1,8 +1,13 @@
 ## 複数の列で同じ解析を行う場合の例
 ## 今回は3列のデータでWelch検定を行う
 
-## Excelファイルからデータを読み込み
+library(dplyr)
+library(tidyr)
+library(purrr)
 library(readxl)
+
+
+## Excelファイルからデータを読み込み
 dat <- read_xlsx("data/data_multiple_column.xlsx")
 
 
@@ -17,10 +22,6 @@ print(resC)
 
 ## まとめて解析を行う場合
 ## 縦長形式に変換 → 元の列ごとにデータ分割 → それぞれWelch検定、P値取り出し
-library(dplyr)
-library(tidyr)
-library(purrr)
-library(readxl)
 
 res <- dat |>
     pivot_longer(A:C, names_to = "item", values_to = "value") |>

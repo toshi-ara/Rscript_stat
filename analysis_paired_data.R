@@ -12,6 +12,7 @@ library(tidyr)
 dat <- read_xlsx("data/data_mean_paired.xlsx")
 
 ## データを直接入力する場合
+## （通常の解析では行わない方法）
 x <- c(15, 16, 17, 21, 21, 22, 25, 26, 27, 29)
 y <- c(26, 21, 24, 23, 20, 24, 29, 31, 29, 28)
 dat <- data.frame(
@@ -33,7 +34,8 @@ print(res)
 
 
 ## Wilcoxonの符号付順位検定（正確版）
-## IDと群分け変数 (group) をカテゴリカル変数に変換（この関数を使用するときは必須）
+## IDと群分け変数 (group) をカテゴリカル変数に変換
+## （この関数を使用するときは必須）
 dat <- dat |>
     mutate(ID = factor(ID), group = factor(group))
 
@@ -41,6 +43,9 @@ library(coin)
 res <- wilcoxsign_test(value ~ group | ID, distribution = "exact", data = dat)
 print(res)
 
-## 0がある場合にSPSSと同じ結果にする場合
-wilcoxsign_test(value ~ group | ID, distribution = "exact", zero.method = "Wilcoxon", data = dat)
+## （発展的内容）
+## データに0があるとき、SPSSと同じ結果にするための設定
+##     zero.method = "Wilcoxon"
+wilcoxsign_test(value ~ group | ID, distribution = "exact",
+                zero.method = "Wilcoxon", data = dat)
 
