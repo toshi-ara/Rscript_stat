@@ -64,6 +64,7 @@ dat$onsetF <- factor(dat$onset, levels = c(1, 0), labels = c("+", "-"))
 ## （発展的内容）
 ## dplyrパッケージのmutate関数を使用することで
 ## このように書くことも可能
+library(dplyr)
 dat <- dat |>
     mutate(exposureF = factor(exposure, levels = c(1, 0), labels = c("+", "-")),
            onsetF = factor(onset, levels = c(1, 0), labels = c("+", "-")))
