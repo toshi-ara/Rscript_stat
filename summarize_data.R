@@ -8,11 +8,13 @@ dat <- read_xlsx("data/data_mean.xlsx")
 
 ## データの集計
 res <- dat |>
-    group_by(group) |>                 ## 変数groupで群分け
-    summarise(n = n(),                 ## サンプルサイズ
-              Mean = mean(value),      ## 平均値
-              SD = sd(value),          ## 標準偏差
-              Median = median(value))  ## 中央値
+    summarise(
+        .by = group,             ## 変数groupで群分け
+        n = n(),                 ## サンプルサイズ
+        Mean = mean(value),      ## 平均値
+        SD = sd(value),          ## 標準偏差
+        Median = median(value)   ## 中央値
+    )
 print(res)
 
 

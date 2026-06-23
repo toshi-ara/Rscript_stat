@@ -18,13 +18,15 @@ library(ggforce)
 
 ## データの集計（例としてSepal.Lengthの値を集計する）
 res <- iris |>
-    group_by(Species) |>                      ## 変数Speciesで群分け
-    summarise(n = n(),                        ## 各群のサンプルサイズ
-              Mean = mean(Sepal.Length),      ## 平均値
-              SD = sd(Sepal.Length),          ## 標準偏差
-              Min = min(Sepal.Length),        ## 最小値
-              Median = median(Sepal.Length),  ## 中央値
-              Max = max(Sepal.Length))        ## 最大値
+    summarise(
+        .by = Species,                  ## 変数Speciesで群分け
+        n = n(),                        ## 各群のサンプルサイズ
+        Mean = mean(Sepal.Length),      ## 平均値
+        SD = sd(Sepal.Length),          ## 標準偏差
+        Min = min(Sepal.Length),        ## 最小値
+        Median = median(Sepal.Length),  ## 中央値
+        Max = max(Sepal.Length)         ## 最大値
+    )
 print(res)
 
 

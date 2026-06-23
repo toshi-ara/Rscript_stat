@@ -46,6 +46,7 @@ print(res)
 ## （発展的内容）
 ## データに0があるとき、SPSSと同じ結果にするための設定
 ##     zero.method = "Wilcoxon"
-wilcoxsign_test(value ~ group | ID, distribution = "exact",
-                zero.method = "Wilcoxon", data = dat)
+res <- wilcoxsign_test(value ~ group | ID, distribution = "exact",
+                       zero.method = "Wilcoxon", data = dat)
+print(res)
 

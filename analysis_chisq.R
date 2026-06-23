@@ -23,6 +23,7 @@ print(res)
 library(readxl)
 dat <- read_xlsx("data/data_prop.xlsx")
 
+
 ####################
 ## 集計表（クロス表）の作成
 ####################
@@ -64,13 +65,15 @@ dat$onsetF <- factor(dat$onset, levels = c(1, 0), labels = c("+", "-"))
 ## （発展的内容）
 ## dplyrパッケージのmutate関数を使用することで
 ## このように書くことも可能
+library(dplyr)
 dat <- dat |>
-    mutate(exposureF = factor(exposure, levels = c(1, 0), labels = c("+", "-")),
-           onsetF = factor(onset, levels = c(1, 0), labels = c("+", "-")))
+    mutate(
+        exposureF = factor(exposure, levels = c(1, 0), labels = c("+", "-")),
+        onsetF = factor(onset, levels = c(1, 0), labels = c("+", "-"))
+    )
 
-####################
+
 ## カイ二乗検定
-####################
 library(coin)
 res <- chisq_test(onsetF ~ exposureF, data = dat)
 print(res)
