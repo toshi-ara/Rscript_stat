@@ -76,7 +76,7 @@ print(res)
 
 library(coin)
 
-dat$group <- factor(dat$group)
+dat$group <- factor(dat$group)  ## groupをカテゴリカル変数に変換
 res <- wilcox_test(value ~ group, distribution = "exact", data = dat)
 print(res)
 
